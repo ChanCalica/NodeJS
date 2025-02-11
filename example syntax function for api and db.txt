@@ -1,0 +1,156 @@
+1. Async API Calls in Node.js
+When making API calls in a Node.js environment, you typically use fetch, axios, or node-fetch.
+
+Using fetch (built-in from Node.js v18+)
+const fetchData = async (url) => {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+        throw error; // Re-throw for handling at a higher level
+    }
+};
+
+// Example usage
+fetchData("https://jsonplaceholder.typicode.com/posts/1")
+    .then((data) => console.log(data))
+    .catch((err) => console.error("Failed:", err.message));
+
+Using axios (recommended for more features like automatic JSON parsing)
+
+const axios = require("axios");
+
+const fetchData = async (url) => {
+    try {
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        console.error("API call failed:", error.message);
+        throw error;
+    }
+};
+
+// Example usage
+fetchData("https://jsonplaceholder.typicode.com/posts/1")
+    .then((data) => console.log(data))
+    .catch((err) => console.error("Failed:", err.message));
+
+✅ Best Practice: Use axios for easier request handling, automatic JSON parsing, and better error handling.
+
+
+2. Async Database Queries
+This depends on which database you're using. Here are examples for MongoDB (Mongoose) and MySQL (using mysql2/promise).
+
+MongoDB (Mongoose) Example
+const mongoose = require("mongoose");
+
+// Define schema
+const userSchema = new mongoose.Schema({ name: String, email: String });
+const User = mongoose.model("User", userSchema);
+
+// Connect to MongoDB
+const connectDB = async () => {
+    try {
+        await mongoose.connect("mongodb://localhost:27017/mydatabase");
+        console.log("MongoDB Connected");
+    } catch (error) {
+        console.error("MongoDB connection error:", error);
+    }
+};
+
+// Fetch a user by ID
+const getUserById = async (id) => {
+    try {
+        const user = await User.findById(id);
+        return user;
+    } catch (error) {
+        console.error("Error fetching user:", error);
+        throw error;
+    }
+};
+
+// Example usage
+connectDB().then(async () => {
+    const user = await getUserById("65fbc7c1a3e9e507e4c2c2b3"); // Example ID
+    console.log(user);
+});
+
+MySQL (Using mysql2/promise)
+const mysql = require("mysql2/promise");
+
+// Create connection
+const connectDB = async () => {
+    return mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        password: "password",
+        database: "testdb",
+    });
+};
+
+// Fetch a user by ID
+const getUserById = async (id) => {
+    try {
+        const connection = await connectDB();
+        const [rows] = await connection.execute("SELECT * FROM users WHERE id = ?", [id]);
+        return rows[0]; // Return first user found
+    } catch (error) {
+        console.error("Database query failed:", error);
+        throw error;
+    }
+};
+
+// Example usage
+getUserById(1)
+    .then((user) => console.log(user))
+    .catch((err) => console.error("Error:", err.message));
+
+✅ Best Practice: Use async/await with proper try/catch for error handling and always close database connections after execution (for MySQL).
+
+
+Parallel API Calls or Database Queries
+If you need to run multiple API calls or database queries in parallel, use Promise.all().
+
+Parallel API Calls
+const fetchMultipleAPIs = async () => {
+    try {
+        const [users, posts] = await Promise.all([
+            fetchData("https://jsonplaceholder.typicode.com/users"),
+            fetchData("https://jsonplaceholder.typicode.com/posts"),
+        ]);
+        console.log("Users:", users);
+        console.log("Posts:", posts);
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+};
+
+fetchMultipleAPIs();
+
+Parallel Database Queries
+const getMultipleUsers = async () => {
+    try {
+        const [user1, user2] = await Promise.all([
+            getUserById(1),
+            getUserById(2),
+        ]);
+        console.log("User 1:", user1);
+        console.log("User 2:", user2);
+    } catch (error) {
+        console.error("Error fetching users:", error);
+    }
+};
+
+getMultipleUsers();
+
+Summary:
+Scenario	Best Practice
+API Calls	Use fetch (Node 18+) or axios (recommended)
+MongoDB Queries	Use mongoose with async/await
+MySQL Queries	Use mysql2/promise with async/await
+Parallel Async Tasks	Use Promise.all() for better performance

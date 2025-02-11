@@ -1,0 +1,64 @@
+1. Async Arrow Function
+Concise and inherits this from the surrounding scope.
+Best for short, simple functions or callbacks.
+
+const fetchData = async (url) => {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+};
+
+✅ Best for: Callbacks, lightweight API calls, and cases where this is not needed.
+
+
+2. Async Function Declaration
+Hoisted, meaning it can be called before its definition.
+Binds its own this, making it useful for methods inside classes.
+async function fetchData(url) {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+}
+
+async function fetchData(url) {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+}
+
+✅ Best for: Reusable utility functions, methods inside classes, and when hoisting is useful.
+
+
+3. Async Function Expression
+Similar to function declarations but not hoisted.
+Useful when defining functions conditionally or passing them around as variables.
+
+const fetchData = async function (url) {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+};
+
+✅ Best for: Assigning functions dynamically or when you don't need hoisting.
+
+
+Which One Should You Use?
+Use an async arrow function (async () => {}) when you need a simple async function and don't need this.
+Use an async function declaration (async function myFunc() {}) when you need hoisting or when defining methods inside a class.
+Use an async function expression (const myFunc = async function() {}) when assigning functions dynamically.

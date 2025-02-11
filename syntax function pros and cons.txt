@@ -1,0 +1,38 @@
+1. Arrow Function (=>)
+More concise.
+Does not bind this, so it inherits this from the surrounding scope.
+Useful for short functions or when this is not needed.
+
+const add = (a, b) => a + b;
+console.log(add(2, 3)); // 5
+
+Multiline version:
+const multiply = (a, b) => {
+    return a * b;
+};
+console.log(multiply(2, 3)); // 6
+
+
+2. Function Declaration (function)
+Hoisted, meaning it can be called before its definition.
+Binds its own this, useful when working with object methods or event handlers.
+
+function subtract(a, b) {
+    return a - b;
+}
+console.log(subtract(5, 3)); // 2
+
+
+3. Function Expression (const func = function() {})
+Similar to function declarations but not hoisted.
+
+const divide = function (a, b) {
+    return a / b;
+};
+console.log(divide(6, 2)); // 3
+
+
+When to Use What?
+✅ Arrow functions → Best for short functions, callbacks, and when this should be inherited.
+✅ Function declarations → Best when this is needed (e.g., class methods, event handlers) or when hoisting is useful.
+✅ Function expressions → Use when you need a named function but don't want hoisting.
