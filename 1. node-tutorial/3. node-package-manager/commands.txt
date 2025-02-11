@@ -1,0 +1,14 @@
+node index.js = run directly the index.js without using the package.json or npm
+
+npm init = manual
+npm init -y = automatic
+npm install {name of package} = 1 package
+npm install {name of package1} {name of package3} {name of package3} = multiple package and add space for each package name   
+npm uninstall
+npm update
+
+npm start = package.json 
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },

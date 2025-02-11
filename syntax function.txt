@@ -1,0 +1,100 @@
+Function Declaration
+function add(a, b) {
+    return a + b;
+}
+
+// Can be called before declaration due to hoisting
+console.log(add(2, 3)); // Works fine
+
+Function Expression
+const add = function(a, b) {
+    return a + b;
+};
+
+// Must be declared before use
+console.log(add(2, 3)); // Works fine
+
+Arrow Function Expression
+const add = (a, b) => {
+    return a + b;
+};
+
+// Or with implicit return syntax
+const multiply = (a, b) => a * b;
+
+Method Definition
+const math = {
+    add(a, b) {
+        return a + b;
+    }
+};
+
+// Can also be written as:
+const mathAlt = {
+    add: function(a, b) {
+        return a + b;
+    }
+};
+
+Constructor Function
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+}
+
+// Usage:
+const john = new Person('John', 30);
+
+Generator Function
+function* sequence() {
+    yield 1;
+    yield 2;
+    return 3;
+}
+
+// Usage:
+const gen = sequence();
+console.log(gen.next()); // {value: 1, done: false}
+console.log(gen.next()); // {value: 2, done: false}
+console.log(gen.next()); // {value: 3, done: true}
+
+
+Async Function
+async function asyncOperation() {
+    const result = await somePromise();
+    return result;
+}
+
+// Or with arrow syntax:
+const asyncOp = async () => {
+    const result = await somePromise();
+    return result;
+};
+
+
+Immediately Invoked Function Expression (IIFE)
+(function(a, b) {
+    console.log(a + b);
+})(2, 3); // Logs 5
+
+// Or with arrow syntax:
+((a, b) => console.log(a + b))(2, 3); // Logs 5
+
+
+Understanding the Decision Flow Diagram
+The diagram above helps you choose the right function declaration style based on your needs:
+
+Pink nodes represent starting points
+Blue nodes show key decision points
+Green nodes show the resulting function declaration styles with examples
+Key decision points explained:
+
+Primary purpose: First consider what you're trying to accomplish
+Creating objects → Constructor functions
+Async operations → Async functions
+Simple functions → Follow the flow based on next criteria
+Hoisting needs: Choose function declarations when you need to call the function before its definition
+Context: Consider where the function will live
+Object methods → Use method definitions
+Variable assignments → Follow the 'this' binding decision
+'This' binding: Choose arrow functions when you don't need their own 'this' binding, otherwise use function expressions
