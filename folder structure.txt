@@ -1,0 +1,66 @@
+📦 my-node-api
+├── 📂 src
+│   ├── 📂 config
+│   │   ├── db.js
+│   │   ├── env.js
+│   │   ├── logger.js
+│   │   ├── cloudinary.js (if using cloud storage)
+│   │   └── passport.js (if using authentication)
+│   │
+│   ├── 📂 controllers
+│   │   ├── auth.controller.js
+│   │   ├── user.controller.js
+│   │   ├── post.controller.js
+│   │   └── index.js
+│   │
+│   ├── 📂 models
+│   │   ├── user.model.js
+│   │   ├── post.model.js
+│   │   ├── index.js
+│   │
+│   ├── 📂 routes
+│   │   ├── auth.routes.js
+│   │   ├── user.routes.js
+│   │   ├── post.routes.js
+│   │   ├── index.js
+│   │
+│   ├── 📂 middlewares
+│   │   ├── auth.middleware.js
+│   │   ├── error.middleware.js
+│   │   ├── validation.middleware.js
+│   │
+│   ├── 📂 services
+│   │   ├── auth.service.js
+│   │   ├── user.service.js
+│   │   ├── post.service.js
+│   │
+│   ├── 📂 utils
+│   │   ├── jwt.js
+│   │   ├── email.js
+│   │   ├── helpers.js
+│   │
+│   ├── 📂 validators
+│   │   ├── auth.validator.js
+│   │   ├── user.validator.js
+│   │   ├── post.validator.js
+│   │
+│   ├── 📂 docs (API Documentation)
+│   │   ├── swagger.json
+│   │   ├── postman_collection.json
+│   │
+│   ├── 📂 tests
+│   │   ├── auth.test.js
+│   │   ├── user.test.js
+│   │   ├── post.test.js
+│   │
+│   ├── app.js
+│   ├── server.js
+│
+├── 📂 public (Static files)
+│   ├── uploads
+│   ├── images
+│
+├── .env
+├── .gitignore
+├── package.json
+├── README.md
