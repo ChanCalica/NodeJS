@@ -64,3 +64,38 @@
 ├── .gitignore
 ├── package.json
 ├── README.md
+
+📌 Folder Breakdown & Responsibilities
+📂 src/config/
+Contains all configuration files (DB, environment variables, logging, etc.).
+📂 src/controllers/
+Handles request-response logic.
+Calls the service layer for business logic.
+Example: user.controller.js manages user-related endpoints.
+📂 src/models/
+Defines database schemas and models.
+Example: user.model.js for MongoDB using Mongoose.
+📂 src/routes/
+Defines all API routes.
+Example: user.routes.js contains /api/users endpoints.
+📂 src/middlewares/
+Custom middleware (authentication, error handling, etc.).
+Example: auth.middleware.js for JWT verification.
+📂 src/services/
+Contains business logic, independent of controllers.
+Example: auth.service.js handles user authentication logic.
+📂 src/utils/
+Helper functions such as JWT token generation, email sending, etc.
+📂 src/validators/
+Input validation using Joi or express-validator.
+Example: auth.validator.js validates user login/signup.
+📂 src/docs/
+API documentation (Swagger, Postman collections).
+📂 src/tests/
+Contains unit and integration tests.
+📂 public/
+Stores static assets like images or file uploads.
+📄 app.js
+Initializes Express, middleware, and routes.
+📄 server.js
+Starts the Node.js server.
