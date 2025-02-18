@@ -1,0 +1,13 @@
+register endpoint
+{
+    "username": "chandev.admin",
+    "email": "chandev.admin@gmail.com",
+    "password": "chandev.admin",
+    "role": "admin"
+}
+
+login endpoint
+{
+    "username": "chandev.admin",
+    "password": "chandev.admin"
+}
